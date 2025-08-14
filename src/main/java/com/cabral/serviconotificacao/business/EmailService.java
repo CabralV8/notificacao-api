@@ -1,6 +1,6 @@
 package com.cabral.serviconotificacao.business;
 
-import com.cabral.serviconotificacao.business.dto.TarefasDTO;
+import com.cabral.serviconotificacao.business.dto.TarefasRecord;
 import com.cabral.serviconotificacao.insfrastructure.exceptions.EmailException;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.InternetAddress;
@@ -32,19 +32,19 @@ public class EmailService {
     @Value("${envio.email.remetente}")
     private String nomeRemetente;
 
-    public void enviaEmail(TarefasDTO dto) {
+    public void enviaEmail(TarefasRecord dto) {
         try {
             MimeMessage mensagem = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mensagem, true, StandardCharsets.UTF_8.name());
 
             mimeMessageHelper.setTo(new InternetAddress(remetente, nomeRemetente));
-            mimeMessageHelper.setTo(InternetAddress.parse(dto.getEmailUsuario()));
+            mimeMessageHelper.setTo(InternetAddress.parse(dto.emailUsuario()));
             mimeMessageHelper.setSubject("Notificação de Tarefa");
 
             Context context = new Context();
-            context.setVariable("nomeTarefa", dto.getNomeTarefa());
-            context.setVariable("dataEvento", dto.getDataEvento());
-            context.setVariable("descricao", dto.getDataEvento());
+            context.setVariable("nomeTarefa", dto.nomeTarefa());
+            context.setVariable("dataEvento", dto.dataEvento());
+            context.setVariable("descricao", dto.dataEvento());
             String template = templateEngine.process("notificacao", context);
             mimeMessageHelper.setText(template, true);
             javaMailSender.send(mensagem);
