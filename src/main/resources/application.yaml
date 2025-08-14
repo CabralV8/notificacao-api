@@ -21,8 +21,8 @@ spring:
 
 envio:
   email:
-    remetente: ${EMAIL_REMETENTE}
-    nomeRemetente: Cabral
+    remetente: "${ENVIO_EMAIL_REMETENTE}"
+    nomeRemetente: "${ENVIO_EMAIL_NOMEREMETENTE}"
 
 server:
   port: 8082

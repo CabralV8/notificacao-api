@@ -1,7 +1,7 @@
 package com.cabral.serviconotificacao.controller;
 
 import com.cabral.serviconotificacao.business.EmailService;
-import com.cabral.serviconotificacao.business.dto.TarefasDTO;
+import com.cabral.serviconotificacao.business.dto.TarefasRecord;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,7 +19,7 @@ public class EmailController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> enviarEmail(@RequestBody TarefasDTO dto){
+    public ResponseEntity<Void> enviarEmail(@RequestBody TarefasRecord dto){
         emailService.enviaEmail(dto);
         return ResponseEntity.ok().build();
     }
